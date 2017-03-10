@@ -1,0 +1,27 @@
+{
+  "name": "voting-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiumozhan/Voting-App.git"
+  },
+  "author": "Xiumo Zhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiumozhan/Voting-App/issues"
+  },
+  "homepage": "https://github.com/xiumozhan/Voting-App#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mocha": "^3.2.0",
+    "mongoose": "^4.8.6",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
+  }
+}
