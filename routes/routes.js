@@ -1,5 +1,7 @@
-const indexController = require('../controllers/node-controllers/indexController');
+const userController = require('../controllers/userController');
 
 module.exports = (app) => {
-    app.get('/', indexController.greeting);
+    app.get('*', userController.index);
+
+    app.post('/api/users', userController.create);
 };
