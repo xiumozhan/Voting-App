@@ -6,25 +6,29 @@ const routes = require('./routes/routes');
 const app = express();
 const db = "mongodb://localhost/voting";
 
-mongoose.connect(db, (err) => {
-    if(err) {
-        console.warn(err);
-    }
-});
+if(process.env.NODE_ENV !== 'test') {
+    console.log('Currently in Dev environment');
 
-const dbConnection = mongoose.connection;
+    mongoose.connect(db, (err) => {
+        if(err) {
+            console.warn(err);
+        }
+    });
 
-dbConnection.once('open', () => {
-    console.log('Successfully connected to', db);
-});
+    const dbConnection = mongoose.connection;
 
-dbConnection.on('disconnected', () => {
-    console.log('Successfully disconnected from', db);
-});
+    dbConnection.once('open', () => {
+        console.log('Successfully connected to', db);
+    });
 
-dbConnection.on('error', (err) => {
-    console.warn('Warning:', err);
-});
+    dbConnection.on('disconnected', () => {
+        console.log('Successfully disconnected from', db);
+    });
+
+    dbConnection.on('error', (err) => {
+        console.warn('Warning:', err);
+    });
+}
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
