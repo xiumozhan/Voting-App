@@ -6,9 +6,9 @@ const User = mongoose.model('user');
 
 describe('Tests for user creation', () => {
 
-    xit('enables POST /api/users to create a new user', (done) => {
+    it('enables POST /api/users to create a new user', (done) => {
         const Xiumo = {
-            name: 'xiumo',
+            name: 'xiumozhan',
             email: 'xiumo@test.com',
             password: 'xiumo123123'
         };
@@ -29,13 +29,13 @@ describe('Tests for user creation', () => {
 
     it('cannot register 2 users with the same name', (done) => {
         const Xiumo = {
-            name: 'xiumo',
-            email: 'xiumo@test.com',
+            name: 'xiumozhan',
+            email: 'xiumozhan@test.com',
             password: 'xiumo123123'
         };
 
         const anotherXiumo = {
-            name: 'xiumo',
+            name: 'xiumozhan',
             email: 'xiumoz@test.com',
             password: 'xiumo123123'
         };
@@ -46,11 +46,38 @@ describe('Tests for user creation', () => {
                     console.log(users);
                     done();
                 });
+            })
+            .catch((err) => {
+                assert(err.message.match('duplicate key error collection'));
+                done();
             });
         });
     });
 
-    xit('cannot register 2 users with the same email address', (done) => {
-        done();
+    it('cannot register 2 users with the same email address', (done) => {
+        const Xiumo = {
+            name: 'xiumoz',
+            email: 'xiumoz@test.com',
+            password: 'xiumo123123'
+        };
+
+        const anotherXiumo = {
+            name: 'xiumozhan',
+            email: 'xiumoz@test.com',
+            password: 'xiumo123123'
+        };
+
+        User.create(Xiumo).then(() => {
+            User.create(anotherXiumo).then(() => {
+                User.find({}).then((users) => {
+                    console.log(users);
+                    done();
+                });
+            })
+            .catch((err) => {
+                assert(err.message.match('duplicate key error collection'));
+                done();
+            });
+        });
     });
 });
