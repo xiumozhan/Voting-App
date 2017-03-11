@@ -30,7 +30,11 @@ const UserSchema = new Schema({
             (password) => password && password.length >= REQUIRED_PASSWORD_LENGTH,
             "Password length must be no less than" + REQUIRED_PASSWORD_LENGTH
         ]
-    }
+    },
+    polls: [{
+        type: Schema.Types.ObjectId,
+        ref: 'poll'
+    }]
 });
 
 UserSchema.pre('save', function(next) {
