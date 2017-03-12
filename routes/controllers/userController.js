@@ -1,8 +1,12 @@
-const User = require('../models/User');
+const User = require('../../models/User');
 
 module.exports = {
-    index(req, res) {
-        res.sendFile(__dirname + '/public/index.html');
+    greeting(req, res, next) {
+        res.send('Hi' + req.body);
+    },
+
+    printId(req, res, next) {
+        res.send(req.params.id);
     },
 
     create(req, res, next) {
@@ -13,4 +17,4 @@ module.exports = {
         })
         .catch(next);
     }
-};
+}

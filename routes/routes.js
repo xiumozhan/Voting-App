@@ -1,7 +1,11 @@
-const userController = require('../controllers/userController');
+const express = require('express');
+const userController = require('./controllers/userController');
 
 module.exports = (app) => {
-    app.get('*', userController.index);
+    app.get('/api', userController.greeting),
 
-    app.post('/api/users', userController.create);
+    app.get('/api/:id', userController.printId),
+
+    app.post('/api/users', userController.create)
+
 };
