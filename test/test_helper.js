@@ -15,6 +15,7 @@ before((done) => {
 
 beforeEach((done) => {
     const users = mongoose.connection.collections.users;
+    const polls = mongoose.connection.collections.polls;
     users.drop()
         .then(() => users.ensureIndex({
             'name': 1
@@ -26,9 +27,13 @@ beforeEach((done) => {
         }, {
             unique: true
         }))
-        .then(() => done())
+        .then(() => {
+            polls.drop()
+                .then(() => done())
+                .catch(() => done());
+        })
         .catch((err) => {
-            console.log("error droping collection", err);
+            console.log("error dropping users collection", err);
             return done();
         });
 });
