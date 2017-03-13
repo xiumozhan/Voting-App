@@ -31,9 +31,9 @@ module.exports = {
             if(user) {
                 bcrypt.compare(userInfo.password, user.password, (error, result) => {
                     if(result) {
-                        res.status(200).send({ valid: result, user: user });
+                        res.status(200).send({ valid: true, user: user });
                     } else {
-                        res.status(400).send({ valid: result, user: user });
+                        res.status(400).send({ valid: false, user: user });
                     }
                 });
             } else {
