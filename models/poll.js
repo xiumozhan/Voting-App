@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+require('./User');
+require('./option');
 
 const PollSchema = new Schema({
     question: {
@@ -13,6 +15,7 @@ const PollSchema = new Schema({
 });
 
 PollSchema.pre('remove', function(next) {
+    console.log('Removing options in the specified poll...');
     const Option = mongoose.model('option');
 
     Option.remove({
@@ -20,6 +23,18 @@ PollSchema.pre('remove', function(next) {
             $in: this.options
         }
     })
+    .then(() => next());
+});
+
+PollSchema.pre('remove', function(next) {
+    console.log('Removing poll reference in respective user...');
+    const User = mongoose.model('user');
+
+    User.update(
+        {  },
+        { $pull: { polls: this._id } },
+        { multi: true }
+    )
     .then(() => next());
 });
 

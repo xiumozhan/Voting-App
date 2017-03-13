@@ -13,5 +13,7 @@ module.exports = (app) => {
 
     app.get('/api/polls', pollController.getAllPolls),
 
-    app.get('/api/poll/:id', pollController.getPollById)
+    app.get('/api/poll/:id', pollController.getPollById),
+
+    app.delete('/api/poll/:id', pollController.deletePollById)
 };

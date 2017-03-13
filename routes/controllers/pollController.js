@@ -42,5 +42,22 @@ module.exports = {
                 }
                 next();
             });
+    },
+
+    deletePollById(req, res, next) {
+        Poll.findById(req.params.id)
+            .then((poll) => poll.remove())
+            .then((poll) => {
+                res.status(200).send({
+                    message: 'Successfully Deleted Specified Poll',
+                    deleted: poll
+                });
+            })
+            .catch((err) => {
+                if(err) {
+                    res.status(404).json(err);
+                }
+                next();
+            });
     }
 };
