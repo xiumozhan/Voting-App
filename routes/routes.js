@@ -1,12 +1,17 @@
 const express = require('express');
 const userController = require('./controllers/userController');
+const pollController = require('./controllers/pollController');
 
 module.exports = (app) => {
     app.get('/api', userController.greeting),
 
-    app.get('/api/:id', userController.printId),
-
     app.post('/api/users', userController.create),
 
-    app.post('/api/login', userController.verify)
+    app.post('/api/login', userController.verify),
+
+    app.post('/api/polls', pollController.create),
+
+    app.get('/api/polls', pollController.getAllPolls),
+
+    app.get('/api/poll/:id', pollController.getPollById)
 };
