@@ -6,27 +6,42 @@ testApp.config(($routeProvider, $locationProvider) => {
     $routeProvider
         .when('/', {
             templateUrl: 'templates/main.html',
-            controller: 'mainController'
+            controller: 'mainController',
+            access: {
+                restricted: false
+            }
         })
 
         .when('/login', {
             templateUrl: 'templates/login.html',
-            controller: 'loginController'
+            controller: 'loginController',
+            access: {
+                restricted: false
+            }
         })
 
         .when('/polls', {
             templateUrl: 'templates/polls.html',
-            controller: 'pollsController'
+            controller: 'pollsController',
+            access: {
+                restricted: false
+            }
         })
 
         .when('/polls/:id', {
             templateUrl: 'templates/poll.html',
-            controller: 'pollController'
+            controller: 'pollController',
+            access: {
+                restricted: false
+            }
         })
 
         .when('/profile', {
             templateUrl: 'templates/profile.html',
-            controller: 'profileController'
+            controller: 'profileController',
+            access: {
+                restricted: true
+            }
         })
 
         .otherwise('/');
