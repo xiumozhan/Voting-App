@@ -44,5 +44,13 @@ testApp.config(($routeProvider, $locationProvider) => {
             }
         })
 
+        .when('/register', {
+            templateUrl: 'templates/register.html',
+            controller: 'registerController',
+            access: {
+                restricted: false
+            }
+        })
+
         .otherwise('/');
 })
