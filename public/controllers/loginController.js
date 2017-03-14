@@ -1,6 +1,7 @@
 testApp.controller('loginController', ['$scope', '$http', '$location', '$window', function($scope, $http, $location, $window) {
     $scope.usernameOrEmail;
     $scope.password;
+    $scope.showErrorMessage = false;
 
     $scope.login = function() {
         $http({
@@ -17,10 +18,12 @@ testApp.controller('loginController', ['$scope', '$http', '$location', '$window'
                 console.log(response.data);
                 $window.localStorage['token'] = response.data;
                 $location.path('/profile');
+                $scope.showErrorMessage = false;
             },
             (response) => {
                 console.log(response);
-                $scope.message = response.errmsg;
+                $scope.showErrorMessage = true;
+                $scope.message = 'Incorrected Username/Email or Password';
             }
         )
         .catch((err) => {

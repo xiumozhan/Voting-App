@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./controllers/userController');
 const pollController = require('./controllers/pollController');
+const tokenController = require('./controllers/tokenController');
 
 module.exports = (app) => {
     app.get('/api', userController.greeting),
@@ -15,5 +16,7 @@ module.exports = (app) => {
 
     app.get('/api/poll/:id', pollController.getPollById),
 
-    app.delete('/api/poll/:id', pollController.deletePollById)
+    app.delete('/api/poll/:id', pollController.deletePollById),
+
+    app.post('/api/token', tokenController.validate)
 };

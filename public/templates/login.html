@@ -2,6 +2,8 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
+            <div ng-show="showErrorMessage">
+                <h3>{{ message }}</h3></div>
             <form ng-submit="login()">
                 <input type="text" placeholder="Username Or Email" class="form-control" ng-model="usernameOrEmail">
                 <br>
