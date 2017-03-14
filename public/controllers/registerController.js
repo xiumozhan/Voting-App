@@ -1,4 +1,4 @@
-testApp.controller('registerController', ['$scope', '$http', function($scope, $http) {
+testApp.controller('registerController', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location) {
     $scope.username;
     $scope.email;
     $scope.password;
@@ -13,10 +13,19 @@ testApp.controller('registerController', ['$scope', '$http', function($scope, $h
                 password: $scope.password
             }
         })
-        .then((response) => {
-            console.log(response);
-        }, (response) => {
-            console.log(response);
+        .then(
+            (response) => {
+                console.log(response);
+                $window.localStorage['token'] = response.data;
+                $location.path('/profile');
+            },
+            (response) => {
+                console.log(response);
+                $scope.message = response.errmsg;
+            }
+        )
+        .catch((err) => {
+            console.log(err);
         });
-    }
+    };
 }]);
