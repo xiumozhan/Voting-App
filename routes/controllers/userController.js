@@ -1,5 +1,6 @@
 const User = require('../../models/User');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     greeting(req, res, next) {
@@ -14,7 +15,12 @@ module.exports = {
         const userProps = req.body;
         const newUser = new User(userProps);
         newUser.save().then((user) => {
-            res.send(user);
+            const token = jwt.sign(
+                { user: user },
+                'freecodecamp',
+                { expiresIn: 7200 }
+            );
+            res.status(201).send(token);
         })
         .catch(next);
     },
@@ -31,9 +37,14 @@ module.exports = {
             if(user) {
                 bcrypt.compare(userInfo.password, user.password, (error, result) => {
                     if(result) {
-                        res.status(200).send({ valid: true, user: user });
+                        const token = jwt.sign(
+                            { user: user },
+                            'freecodecamp',
+                            { expiresIn: 7200 }
+                        );
+                        res.status(200).send(token);
                     } else {
-                        res.status(400).send({ valid: false, user: user });
+                        res.status(400).send({ valid: false, user: true });
                     }
                 });
             } else {
