@@ -10,13 +10,13 @@ module.exports = (app) => {
 
     app.post('/api/login', userController.verify),
 
-    app.post('/api/polls', pollController.create),
+    app.post('/api/polls', tokenController.authenticate, pollController.create),
 
     app.get('/api/polls', pollController.getAllPolls),
 
     app.get('/api/poll/:id', pollController.getPollById),
 
-    app.delete('/api/poll/:id', pollController.deletePollById),
+    app.delete('/api/poll/:id', tokenController.authenticate, pollController.deletePollById),
 
     app.post('/api/token', tokenController.validate)
 };
