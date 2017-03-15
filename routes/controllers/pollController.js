@@ -65,6 +65,9 @@ module.exports = {
 
     getPollById(req, res, next) {
         Poll.findOne({ _id: req.params.id })
+            .populate({
+                path: 'options'
+            })
             .then((poll) => {
                 res.status(200).json(poll);
             })
@@ -73,6 +76,20 @@ module.exports = {
                     console.log(err);
                     res.status(404).json(err);
                 }
+                next();
+            });
+    },
+
+    getPollsByUser(req, res, next) {
+        User.findById(req.query.id)
+            .populate({
+                path: 'polls'
+            })
+            .then((user) => {
+                res.status(200).send(polls);
+            })
+            .catch((err) => {
+                console.log(err);
                 next();
             });
     },

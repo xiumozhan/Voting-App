@@ -8,6 +8,8 @@ module.exports = (app) => {
 
     app.post('/api/users', userController.create),
 
+    app.get('/api/user/polls', pollController.getPollsByUser),
+
     app.post('/api/login', userController.verify),
 
     app.post('/api/polls', tokenController.authenticate, pollController.create),
