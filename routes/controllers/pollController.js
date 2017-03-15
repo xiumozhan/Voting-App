@@ -46,11 +46,15 @@ module.exports = {
 
             Promise.all([pollQuery, userQuery, optionQuery])
                 .then(([poll, user, ops]) => {
-                    console.log(ops);
+                    // console.log(ops);
                     user.polls.push(poll);
-                    return user.save();
+                    ops.forEach((op) => {
+                        poll.options.push(op._id);
+                        // console.log(poll.options);
+                    })
+                    return Promise.all([user.save(), poll.save()]);
                 })
-                .then((user) => {
+                .then(([user, poll]) => {
                     console.log(user);
                     res.status(200).send(user);
                 })
@@ -86,6 +90,39 @@ module.exports = {
                 if(err) {
                     res.status(404).json(err);
                 }
+                next();
+            });
+    },
+
+    addOption(req, res, next) {
+        let optionQuery;
+        const options = req.body.options;
+        const pollQuery = Poll.findById(req.params.id);
+        if(Array.isArray(options)) {
+            optionQuery = Option.create(options);
+        } else {
+            optionQuery = Option.insertMany(options);
+        }
+
+        Promise.all([optionQuery, pollQuery])
+            .then(([options, poll]) => {
+                if(Array.isArray(options)) {
+                    options.forEach((op) => {
+                        poll.options.push(op._id);
+                    });
+                } else {
+                    poll.options.push(op._id);
+                }
+                return poll.save();
+            })
+            .then((poll) => {
+                res.status(201).send({
+                    message: 'Successfully Added Option(s)',
+                    poll: poll,
+                });
+            })
+            .catch((err) => {
+                console.log(err);
                 next();
             });
     }

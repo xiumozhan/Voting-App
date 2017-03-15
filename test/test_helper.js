@@ -16,6 +16,7 @@ before((done) => {
 beforeEach((done) => {
     const users = mongoose.connection.collections.users;
     const polls = mongoose.connection.collections.polls;
+    const options = mongoose.connection.collections.options;
     users.drop()
         .then(() => users.ensureIndex({
             'name': 1
@@ -29,7 +30,11 @@ beforeEach((done) => {
         }))
         .then(() => {
             polls.drop()
-                .then(() => done())
+                .then(() => {
+                    options.drop()
+                        .then(() => done())
+                        .catch(() => done());
+                })
                 .catch(() => done());
         })
         .catch((err) => {

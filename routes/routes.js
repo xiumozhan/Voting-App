@@ -18,5 +18,7 @@ module.exports = (app) => {
 
     app.delete('/api/poll/:id', tokenController.authenticate, pollController.deletePollById),
 
-    app.post('/api/token', tokenController.validate)
+    app.post('/api/token', tokenController.validate),
+
+    app.post('/api/poll/:id', tokenController.authenticate, pollController.addOption)
 };
