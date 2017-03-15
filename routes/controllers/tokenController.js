@@ -13,7 +13,7 @@ module.exports = {
                 res.status(200).send({
                     message: 'Token Validation Succeeded',
                     token: decoded
-                })
+                });
             }
         });
     },
