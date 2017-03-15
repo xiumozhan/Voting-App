@@ -86,7 +86,7 @@ module.exports = {
                 path: 'polls'
             })
             .then((user) => {
-                res.status(200).send(polls);
+                res.status(200).send(user.polls);
             })
             .catch((err) => {
                 console.log(err);
