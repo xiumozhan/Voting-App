@@ -142,5 +142,19 @@ module.exports = {
                 console.log(err);
                 next();
             });
+    },
+
+    incrementOption(req, res, next) {
+        const optionId = req.params.id;
+        Option.findByIdAndUpdate(optionId, {
+            $inc: { count: 1 }
+        })
+        .then((option) => {
+            res.status(200).send(option);
+        })
+        .catch((err) => {
+            console.log(err);
+            next();
+        });
     }
 };

@@ -38,7 +38,13 @@ module.exports = {
                 bcrypt.compare(userInfo.password, user.password, (error, result) => {
                     if(result) {
                         const token = jwt.sign(
-                            { user: user },
+                            {
+                                user: {
+                                    id: user._id,
+                                    name: user.name,
+                                    email: user.email
+                                }
+                            },
                             'freecodecamp',
                             { expiresIn: 7200 }
                         );

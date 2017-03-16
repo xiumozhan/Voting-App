@@ -22,5 +22,7 @@ module.exports = (app) => {
 
     app.post('/api/token', tokenController.validate),
 
-    app.post('/api/poll/:id', tokenController.authenticate, pollController.addOption)
+    app.post('/api/poll/:id', tokenController.authenticate, pollController.addOption),
+
+    app.put('/api/option/:id', pollController.incrementOption)
 };
