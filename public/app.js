@@ -21,15 +21,15 @@ testApp.config(($routeProvider, $locationProvider) => {
         })
 
         .when('/polls', {
-            templateUrl: 'templates/polls.html',
+            templateUrl: 'templates/pollsPage.html',
             controller: 'pollsController',
             access: {
                 restricted: false
             }
         })
 
-        .when('/polls/:id', {
-            templateUrl: 'templates/poll.html',
+        .when('/poll/:id', {
+            templateUrl: 'templates/pollPage.html',
             controller: 'pollController',
             access: {
                 restricted: false

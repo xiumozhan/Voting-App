@@ -1,1 +1,22 @@
-<h3>{{ title }}</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div ng-repeat="poll in polls" ng-click="goToPoll(poll._id)">
+                <h4>{{ poll.question }}<h4>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+
+<div class="container-fluid text-center">
+    <h3>Any new topic you want to vote on today?</h3>
+    <br>
+    <form>
+        <input type="text" ng-model="pollQuestion" placeholder="Type the topic you want to vote here" class="form-control">
+        <br>
+        <button class="btn btn-success" ng-click="createPoll()">Submit Poll</button>
+        <button class="btn btn-info" ng-click="addOption()">Add Option</button>
+    </form>
+</div>
