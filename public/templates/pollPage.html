@@ -1,1 +1,37 @@
-<h3>{{ title }}</h3>
+<div class="container-fluid">
+    <div class="panel panel-info">
+        <div class="panel-heading text-center">
+            <h3>{{ title }}</h3>
+        </div>
+        <div class="panel-body">
+            <form>
+                <div ng-repeat="option in options" class="row">
+                    <div class="col-sm-12">
+                        <input type="radio" name="poll-option" ng-model="selection.selected" ng-value="{{ $index }}"> {{ option.name }}
+                        <br>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-sm-12">
+                        <button class="btn btn-success" ng-click="vote()" ng-disabled="selection.selected === undefined">Vote</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid text-center">
+    <h3>Not satisfied with current options? Add your options here</h3>
+    <br>
+    <form>
+        <div class="option-container">
+            <div ng-repeat="option in added track by option.name">
+                <input type="text" ng-model="added[$index].name" placeholder="Type the option you want to add" class="form-control">
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-info" ng-click="addOption()">Add Option</button>
+        <button class="btn btn-success" ng-click="submitAddedOptions()">Submit Poll</button>
+    </form>
+</div>

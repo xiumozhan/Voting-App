@@ -3,10 +3,16 @@ testApp.controller('profileController', ['$scope', '$window', '$location', 'jwtH
     console.log(tokenPayload);
 
     $scope.username = tokenPayload.user.name;
+    $scope.added = [];
     // $scope.polls = tokenPayload.user.polls;
 
     $scope.logOut = function() {
         delete $window.localStorage['token'];
+
+        if($window.localStorage['voted']) {
+            delete $window.localStorage['voted'];
+        }
+
         $location.path('/');
     };
 
@@ -38,7 +44,8 @@ testApp.controller('profileController', ['$scope', '$window', '$location', 'jwtH
     };
 
     $scope.createPoll = function() {
-        $http({
+        let request;
+        request = {
             method: 'POST',
             url: '/api/polls',
             data: {
@@ -47,7 +54,13 @@ testApp.controller('profileController', ['$scope', '$window', '$location', 'jwtH
                     name: $scope.username
                 }
             }
-        })
+        };
+
+        if($scope.added.length > 0) {
+            request.data.options = $scope.added;
+        }
+
+        $http(request)
         .then((response) => {
             const polls = response.data.polls;
             console.log('newly created poll:');
@@ -67,7 +80,11 @@ testApp.controller('profileController', ['$scope', '$window', '$location', 'jwtH
             url: `/api/poll/${id}`
         })
         .then((response) => {
-            console.log(response);
+
+            $scope.polls.splice($scope.polls.findIndex((poll) => {
+                return poll._id === id;
+            }), 1);
+
         }, (fail) => {
             console.log(fail);
         })
@@ -75,4 +92,9 @@ testApp.controller('profileController', ['$scope', '$window', '$location', 'jwtH
             console.log(err);
         });
     };
+
+    $scope.addOption = (option) => {
+        $scope.added.push(option);
+    };
+
 }]);
