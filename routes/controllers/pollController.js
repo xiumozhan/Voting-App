@@ -133,6 +133,12 @@ module.exports = {
                 return poll.save();
             })
             .then((poll) => {
+                return Poll.findOne(poll)
+                    .populate({
+                        path: 'options'
+                    });
+            })
+            .then((poll) => {
                 res.status(201).send({
                     message: 'Successfully Added Option(s)',
                     poll: poll,
@@ -148,6 +154,8 @@ module.exports = {
         const optionId = req.params.id;
         Option.findByIdAndUpdate(optionId, {
             $inc: { count: 1 }
+        }, {
+            new: true
         })
         .then((option) => {
             res.status(200).send(option);
