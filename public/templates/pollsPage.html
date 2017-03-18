@@ -1,1 +1,18 @@
-<h3>{{ title }}</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div ng-repeat="poll in polls" class="panel">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <poll-panel name="poll.question"></poll-panel>
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-info" ng-click="goToPoll(poll._id)">Go To Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
