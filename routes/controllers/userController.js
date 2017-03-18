@@ -16,7 +16,13 @@ module.exports = {
         const newUser = new User(userProps);
         newUser.save().then((user) => {
             const token = jwt.sign(
-                { user: user },
+                {
+                    user: {
+                        id: user._id,
+                        name: user.name,
+                        email: user.email
+                    }
+                },
                 'freecodecamp',
                 { expiresIn: 7200 }
             );
