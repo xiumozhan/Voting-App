@@ -1,5 +1,6 @@
 testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$window', '$timeout', function($scope, $routeParams, $http, $window, $timeout) {
     const pollId = $routeParams.id;
+    const ctx = document.getElementById('votingResult').getContext('2d');
     const getAllOptions = () => {
         if(pollId) {
             $http({
@@ -12,6 +13,9 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
                 const pollObj = poll.data;
                 $scope.title = pollObj.question;
                 $scope.options = pollObj.options;
+
+                generateResultChart();
+
             }, (fail) => {
                 console.log(fail);
             })
@@ -19,6 +23,35 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
                 console.log(err);
             });
         }
+    };
+
+    const generateResultChart = () => {
+
+        return votingResult = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: $scope.options.map((option) => option.name),
+                datasets: [
+                    {
+                        label: '# of votes',
+                        data: $scope.options.map((option) => option.count),
+                        backgroundColor: '#66c2ff'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                        }
+                    }],
+                    yAxes: [{
+                        display: false
+                    }]
+                }
+            }
+        });
     };
 
     getAllOptions();
@@ -60,6 +93,8 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
                 const pollObj = poll.data.poll;
                 $scope.options = pollObj.options;
                 $scope.added = [];
+
+                generateResultChart();
             }, (fail) => {
                 console.log(fail);
                 $scope.errorMessage = fail;
@@ -87,6 +122,8 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
             $window.localStorage['voted'] = true;
             $scope.voted = true;
             $scope.selection.selected = undefined;
+
+            generateResultChart();
         }, (fail) => {
             console.log(fail);
         })
@@ -94,4 +131,6 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
             console.log(err);
         });
     };
+
+
 }]);

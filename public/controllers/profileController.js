@@ -27,7 +27,6 @@ testApp.controller('profileController', ['$scope', '$window', '$location', 'jwtH
             })
             .then((polls) => {
                 $scope.polls = polls.data;
-                console.log($scope.polls);
             }, (fail) => {
                 console.log(fail);
             })
