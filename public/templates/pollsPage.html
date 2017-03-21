@@ -1,5 +1,18 @@
 <div class="container">
-    <div class="container-fluid">
+    <div class="container-fluid search-container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <form ng-submit="searchPoll()" class="search-form">
+                    <i class="fa fa-search search-icon"></i>
+                    <input type="text" ng-model="searchString" placeholder="Search The Poll You're Looking For" class="form-control">
+                    <i class="fa fa-remove remove-icon" ng-click="clearSearchString()"></i>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    <div class="container-fluid polls-container">
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-10">

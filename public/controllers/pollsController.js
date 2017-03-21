@@ -1,4 +1,6 @@
 testApp.controller('pollsController', ['$scope', '$http', '$location', function($scope, $http, $location) {
+    let fullPollList = [];
+
     const loadAllPolls = () => {
         $http({
             method: 'GET',
@@ -6,6 +8,7 @@ testApp.controller('pollsController', ['$scope', '$http', '$location', function(
         })
         .then((polls) => {
             $scope.polls = polls.data;
+            fullPollList = $scope.polls;
         }, (fail) => {
             console.log(fail);
         })
@@ -19,4 +22,20 @@ testApp.controller('pollsController', ['$scope', '$http', '$location', function(
     $scope.goToPoll = (id) => {
         $location.path(`/poll/${id}`);
     };
+
+    $scope.clearSearchString = () => {
+        $scope.searchString = undefined;
+        $scope.polls = fullPollList;
+    };
+
+    $scope.searchPoll = () => {
+        let escaped;
+        escaped = $scope.searchString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        escaped = escaped.replace(/\s+/g, '.*$&');
+        const searchExp = new RegExp(escaped, 'gi');
+        console.log(searchExp);
+        $scope.polls = fullPollList.filter((poll) => {
+            return searchExp.test(poll.question) === true;
+        });
+    }
 }]);

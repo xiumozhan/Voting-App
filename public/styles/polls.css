@@ -1,0 +1,28 @@
+.polls-container {
+    margin-top: 20px;
+}
+
+.search-container {
+    margin-top: 20px;
+    position: relative;
+}
+
+.search-container .search-icon {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.search-container .remove-icon {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-container input[type='text'] {
+    padding-left: 30px;
+    padding-right: 30px;
+}
