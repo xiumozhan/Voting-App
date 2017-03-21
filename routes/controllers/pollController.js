@@ -164,5 +164,22 @@ module.exports = {
             console.log(err);
             next();
         });
+    },
+
+    getRandomPoll(req, res, next) {
+        Poll.aggregate([
+             {
+                 $sample: {
+                     size: 1
+                 }
+             }
+        ])
+        .then((sample) => {
+            res.status(200).send(sample);
+        })
+        .catch((err) => {
+            console.log(err);
+            next();
+        });
     }
 };

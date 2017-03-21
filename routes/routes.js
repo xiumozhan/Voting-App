@@ -18,6 +18,8 @@ module.exports = (app) => {
 
     app.get('/api/poll/:id', pollController.getPollById),
 
+    app.get('/api/random-poll', pollController.getRandomPoll),
+
     app.delete('/api/poll/:id', tokenController.authenticate, pollController.deletePollById),
 
     app.post('/api/token', tokenController.validate),
