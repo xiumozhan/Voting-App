@@ -6,10 +6,15 @@
     <meta charset="UTF-8">
     <title>FCC Voting Application</title>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'>
+    <link rel='stylesheet' href='styles/main.css'>
+    <link rel='stylesheet' href='styles/pollPage.css'>
+    <link rel='stylesheet' href='styles/navigation.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.2/angular-route.js"></script>
     <script src="node_modules/angular-jwt/dist/angular-jwt.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script> -->
     <script src="app.js"></script>
     <script src="controllers/tokenValidation.js"></script>
     <script src="controllers/mainController.js"></script>
@@ -18,11 +23,15 @@
     <script src="controllers/pollController.js"></script>
     <script src="controllers/profileController.js"></script>
     <script src="controllers/registerController.js"></script>
+    <script src="controllers/navController.js"></script>
     <script src="directives/pollPanel.js"></script>
+    <script src="directives/navigation.js"></script>
 </head>
 
 <body>
-    <div class="container" ng-view></div>
+    <nav-container fake='true'></nav-container>
+    <nav-container fake='false'></nav-container>
+    <div ng-view></div>
 </body>
 
 </html>

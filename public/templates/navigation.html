@@ -1,0 +1,24 @@
+<nav class="navbar" ng-class="{'fake-navbar': fake}">
+    <div class="navigation-container">
+        <div class="before-sign-in" ng-show="username === undefined">
+            <ul>
+                <li>
+                    <button class="btn btn-primary" ng-click="signIn()">Sign In</button>
+                </li>
+                <li>
+                    <button class="btn btn-info" ng-click="signUp()">Sign Up</button>
+                </li>
+            </ul>
+        </div>
+        <div class="after-sign-in" ng-show="username !== undefined">
+            <ul>
+                <li ng-if="fake === false">
+                    <span class="greeting">Welcome {{ username }}</span>
+                </li>
+                <li>
+                    <button class="btn btn-danger" ng-click="logOut()">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

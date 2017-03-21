@@ -1,37 +1,39 @@
-<div class="container-fluid">
-    <h3 class="text-center">My Poll History</h3>
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-10">
-            <div ng-repeat="poll in polls" class="panel">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <poll-panel name="poll.question"></poll-panel>
-                    </div>
-                    <div class="col-sm-3">
-                        <button class="btn btn-info" ng-click="goToPoll(poll._id)">Go To Details</button>
-                        <button class="btn btn-danger" ng-click="deletePoll(poll._id)">Delete</button>
+<div class="container">
+    <div class="container-fluid">
+        <h3 class="text-center">My Poll History</h3>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div ng-repeat="poll in polls" class="panel">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <poll-panel name="poll.question"></poll-panel>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-info" ng-click="goToPoll(poll._id)">Go To Details</button>
+                            <button class="btn btn-danger" ng-click="deletePoll(poll._id)">Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-sm-1"></div>
         </div>
-        <div class="col-sm-1"></div>
     </div>
-</div>
 
-<div class="container-fluid text-center">
-    <h3>Any new topic you want to vote on today?</h3>
-    <br>
-    <form>
-        <input type="text" ng-model="pollQuestion" placeholder="Type the topic you want to vote here" class="form-control">
+    <div class="container-fluid text-center">
+        <h3>Any new topic you want to vote on today?</h3>
         <br>
-        <div class="option-container">
-            <div ng-repeat="option in added track by option.name">
-                <input type="text" ng-model="added[$index].name" placeholder="Type the option you want the community to vote on" class="form-control">
+        <form>
+            <input type="text" ng-model="pollQuestion" placeholder="Type the topic you want to vote here" class="form-control">
+            <br>
+            <div class="option-container">
+                <div ng-repeat="option in added track by option.name">
+                    <input type="text" ng-model="added[$index].name" placeholder="Type the option you want the community to vote on" class="form-control">
+                </div>
             </div>
-        </div>
-        <br>
-        <button class="btn btn-success" ng-click="createPoll()">Submit Poll</button>
-        <button class="btn btn-info" ng-click="addOption()">Add Option</button>
-    </form>
+            <br>
+            <button class="btn btn-success" ng-click="createPoll()">Submit Poll</button>
+            <button class="btn btn-info" ng-click="addOption()">Add Option</button>
+        </form>
+    </div>
 </div>

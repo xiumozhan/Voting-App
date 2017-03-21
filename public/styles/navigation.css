@@ -1,0 +1,33 @@
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  margin-bottom: 0;
+}
+
+nav .btn {
+    width: auto;
+}
+
+nav li {
+    list-style-type: none;
+    float: right;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+.fake-navbar {
+    position: relative;
+    visibility: hidden;
+}
+
+.after-sign-in button {
+    margin-left: 30px;
+}
+
+.greeting {
+    color: #ffffff;
+}

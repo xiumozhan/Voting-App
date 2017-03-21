@@ -26,11 +26,19 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
     };
 
     const generateResultChart = () => {
+        let labels;
+
+        labels = $scope.options.map((option) => option.name);
+        labels.forEach((label, i) => {
+            if(label.length > 20) {
+                labels[i] = label.match(/.{1,20}/g);
+            }
+        });
 
         return votingResult = new Chart(ctx, {
-            type: 'horizontalBar',
+            type: 'bar',
             data: {
-                labels: $scope.options.map((option) => option.name),
+                labels: labels,
                 datasets: [
                     {
                         label: '# of votes',
@@ -41,13 +49,16 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
             },
             options: {
                 scales: {
-                    xAxes: [{
+                    yAxes: [{
                         ticks: {
                             beginAtZero: true,
                         }
                     }],
-                    yAxes: [{
-                        display: false
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            drawOnChartArea: true
+                        }
                     }]
                 }
             }
@@ -72,6 +83,10 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
     $scope.addOption = (option) => {
         $scope.added.push(option);
     };
+
+    $scope.removeOption = (index) => {
+        $scope.added.splice(index, 1);
+    }
 
     $scope.submitAddedOptions = () => {
         if($scope.added.length > 0) {
@@ -131,6 +146,4 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
             console.log(err);
         });
     };
-
-
 }]);

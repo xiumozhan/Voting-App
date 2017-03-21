@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.poll-panel .panel {
+    margin-top: 100px;
+}
+
+.poll-panel .btn,
+.add-option-form .btn {
+    width: 200px;
+}
+
+.add-option-form {
+    margin-bottom: 100px;
+}
+
+.add-option-form button:first-of-type{
+    margin-right: 50px;
+}
+
+.options {
+    position: relative;
+}
+
+.remove-icon {
+    position: absolute;
+    /*font-size: 20px;*/
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}

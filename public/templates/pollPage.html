@@ -1,44 +1,47 @@
-<div class="container-fluid">
-    <div class="panel panel-info">
-        <div class="panel-heading text-center">
-            <h3>{{ title }}</h3>
-        </div>
-        <div class="panel-body">
-            <form>
-                <div ng-repeat="option in options" class="row">
-                    <div class="col-sm-12">
-                        <input type="radio" name="poll-option" ng-model="selection.selected" ng-value="{{ $index }}"> {{ option.name }}
-                        <br>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="col-sm-12">
-                        <button class="btn btn-success" ng-click="vote()" ng-disabled="selection.selected === undefined">Vote</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <div class="container">
-    <h2 class="text-center">Voting Result</h2>
-    <div>
-        <canvas id="votingResult"></canvas>
-    </div>
-</div>
-
-<div class="container-fluid text-center">
-    <h3>Not satisfied with current options? Add your options here</h3>
-    <br>
-    <form>
-        <div class="option-container">
-            <div ng-repeat="option in added track by option.name">
-                <input type="text" ng-model="added[$index].name" placeholder="Type the option you want to add" class="form-control">
+    <div class="container-fluid poll-panel">
+        <div class="panel panel-info">
+            <div class="panel-heading text-center">
+                <h3>{{ title }}</h3>
+            </div>
+            <div class="panel-body">
+                <form>
+                    <div ng-repeat="option in options" class="row">
+                        <div class="col-sm-12">
+                            <input type="radio" name="poll-option" ng-model="selection.selected" ng-value="{{ $index }}"> {{ option.name }}
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success" ng-click="vote()" ng-disabled="selection.selected === undefined">Vote</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid voting-result-container">
+        <h3 class="text-center">Voting Result</h3>
+        <div>
+            <canvas id="votingResult"></canvas>
+        </div>
+    </div>
+
+    <div class="container-fluid text-center">
+        <h3>Not satisfied with current options? Add your options here</h3>
         <br>
-        <button class="btn btn-info" ng-click="addOption()">Add Option</button>
-        <button class="btn btn-success" ng-click="submitAddedOptions()">Submit Option(s)</button>
-    </form>
+        <form class="add-option-form">
+            <div class="option-container">
+                <div ng-repeat="option in added track by option.name" class="options">
+                    <input type="text" ng-model="added[$index].name" placeholder="Type the option you want to add" class="form-control">
+                    <i class="fa fa-remove remove-icon" ng-click="removeOption($index)"></i>
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-info" ng-click="addOption()">Add Option</button>
+            <button class="btn btn-success" ng-click="submitAddedOptions()">Submit Option(s)</button>
+        </form>
+    </div>
 </div>
