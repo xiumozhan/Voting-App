@@ -22,14 +22,14 @@
         </div>
     </div>
 
-    <div class="container-fluid voting-result-container">
+    <div class="container-fluid voting-result-container" ng-show="options.length > 0">
         <h3 class="text-center">Voting Result</h3>
         <div>
             <canvas id="votingResult"></canvas>
         </div>
     </div>
 
-    <div class="container-fluid text-center">
+    <div class="container-fluid text-center" ng-show="isLoggedIn === true">
         <h3>Not satisfied with current options? Add your options here</h3>
         <br>
         <form class="add-option-form">

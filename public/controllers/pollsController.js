@@ -33,7 +33,6 @@ testApp.controller('pollsController', ['$scope', '$http', '$location', function(
         escaped = $scope.searchString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         escaped = escaped.replace(/\s+/g, '.*$&');
         const searchExp = new RegExp(escaped, 'gi');
-        console.log(searchExp);
         $scope.polls = fullPollList.filter((poll) => {
             return searchExp.test(poll.question) === true;
         });

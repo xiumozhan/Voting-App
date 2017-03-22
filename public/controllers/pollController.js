@@ -146,4 +146,16 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
             console.log(err);
         });
     };
+
+    $scope.isLoggedIn = $window.localStorage['token'] !== undefined;
+
+    $scope.$watch(() => $window.localStorage['token'], (newToken, oldToken) => {
+        if(newToken !== undefined) {
+            $scope.isLoggedIn = true;
+        }
+
+        if(newToken === undefined) {
+            $scope.isLoggedIn = false;
+        }
+    });
 }]);
