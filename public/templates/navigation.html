@@ -13,7 +13,7 @@
         <div class="after-sign-in" ng-show="username !== undefined">
             <ul>
                 <li ng-if="fake === false">
-                    <span class="greeting">Welcome {{ username }}</span>
+                    <a class="greeting" href="/profile">Welcome {{ username }}</a>
                 </li>
                 <li>
                     <button class="btn btn-danger" ng-click="logOut()">Logout</button>
