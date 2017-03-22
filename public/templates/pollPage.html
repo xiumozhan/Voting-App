@@ -44,4 +44,25 @@
             <button class="btn btn-success" ng-click="submitAddedOptions()">Submit Option(s)</button>
         </form>
     </div>
+
+    <div class="container-fluid share-container">
+        <span class="share-span">Share On: </span>
+
+        <a ng-href="http://twitter.com/share?url={{ currentLink }}" class="share-link" target="_blank">
+            <i class="fa fa-twitter"></i>
+        </a>
+
+        <a ng-href="http://facebook.com/share?url={{ currentLink }}" class="share-link" target="_blank">
+            <i class="fa fa-facebook"></i>
+        </a>
+
+        <a ng-href="http://plus.google.com/share?url={{ currentLink }}" class="share-link" target="_blank">
+            <i class="fa fa-google-plus"></i>
+        </a>
+
+        <a ng-href="http://instagram.com/share?url={{ currentLink }}" class="share-link" target="_blank">
+            <i class="fa fa-instagram"></i>
+        </a>
+
+    </div>
 </div>

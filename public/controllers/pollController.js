@@ -1,4 +1,4 @@
-testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$window', '$timeout', function($scope, $routeParams, $http, $window, $timeout) {
+testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$window', '$timeout', '$location', function($scope, $routeParams, $http, $window, $timeout, $location) {
     const pollId = $routeParams.id;
     const ctx = document.getElementById('votingResult').getContext('2d');
     const getAllOptions = () => {
@@ -158,4 +158,6 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
             $scope.isLoggedIn = false;
         }
     });
+
+    $scope.currentLink = $location.path();
 }]);
