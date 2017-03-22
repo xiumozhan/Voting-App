@@ -1,7 +1,9 @@
 testApp.run(['$rootScope', '$location', '$window', '$http', function($rootScope, $location, $window, $http) {
 
     $http.defaults.headers.common.Authorization = 'Bearer ' + $window.localStorage.token;
-    console.log('token:', $window.localStorage.token);
+    $rootScope.$watch(() => $window.localStorage.token, (newToken, oldToken) => {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + newToken;
+    });
 
     $rootScope.$on('$routeChangeStart', (event, nextRoute, currentRoute) => {
         console.log(nextRoute, currentRoute);
