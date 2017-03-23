@@ -80,7 +80,11 @@ testApp.controller('pollController', ['$scope', '$routeParams', '$http', '$windo
         }, 10 * 1000);
     });
 
-    $scope.addOption = (option) => {
+    $scope.addOption = () => {
+        const option = {
+            name: ''
+        };
+        
         $scope.added.push(option);
     };
 
